@@ -40,3 +40,5 @@ passport.deserializeUser(async (id, done) => {
     done(error, null);
   }
 });
+
+console.log("GOOGLE CALLBACK URL:", process.env.BASE_URL + "/auth/google/callback");
