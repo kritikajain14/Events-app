@@ -37,7 +37,9 @@ mongoose.connect(process.env.MONGODB_URI)
     console.log('Connected to MongoDB');
 
     // ✅ RUN SCRAPER AFTER CONNECTION
-    await scrapeAllEvents(); 
+    if (process.env.NODE_ENV !== "production") {
+  await scrapeAllEvents();
+}
     
   })
   .catch(err => {
