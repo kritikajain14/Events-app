@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create axios instance with default config
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000',
+  baseURL: import.meta.env.VITE_API_URL + '/api',
   withCredentials: true, // Important for cookies/session
   headers: {
     'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ export const authApi = {
   // Login (redirects to Google)
   login: () => {
     window.location.href = `${
-      import.meta.env.VITE_API_URL || 'http://localhost:3000'
+      import.meta.env.VITE_API_URL
     }/auth/google`;
   },
   
