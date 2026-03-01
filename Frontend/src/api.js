@@ -70,28 +70,28 @@ api.interceptors.response.use(
 // Event endpoints
 export const eventApi = {
   // Get all events with pagination and search
-  getEvents: (params) => api.get('/api/events', { params }),
+  getEvents: (params) => api.get('/events', { params }),
   
   // Get single event by ID
-  getEventById: (id) => api.get(`/api/events/${id}`),
+  getEventById: (id) => api.get(`/events/${id}`),
 };
 
 // Dashboard endpoints (protected)
 export const dashboardApi = {
   // Get dashboard events with filters
-  getDashboardEvents: (params) => api.get('/api/dashboard/events', { params }),
+  getDashboardEvents: (params) => api.get('/dashboard/events', { params }),
   
   // Import event to platform
-  importEvent: (id, notes) => api.patch(`/api/dashboard/events/${id}/import`, { notes }),
+  importEvent: (id, notes) => api.patch(`/dashboard/events/${id}/import`, { notes }),
   
   // Get event statistics
-  getEventStats: () => api.get('/api/dashboard/stats'),
+  getEventStats: () => api.get('/dashboard/stats'),
   
   // Bulk import events
-  bulkImportEvents: (eventIds) => api.post('/api/dashboard/events/bulk-import', { eventIds }),
+  bulkImportEvents: (eventIds) => api.post('/dashboard/events/bulk-import', { eventIds }),
   
   // Export events
-  exportEvents: (filters) => api.get('/api/dashboard/events/export', { 
+  exportEvents: (filters) => api.get('/dashboard/events/export', { 
     params: filters,
     responseType: 'blob' // For file download
   }),
@@ -105,7 +105,7 @@ export const authApi = {
   // Login (redirects to Google)
   login: () => {
     window.location.href = `${
-      import.meta.env.VITE_API_URL
+      import.meta.env.VITE_API_URL + "/api"
     }/auth/google`;
   },
   
@@ -119,19 +119,19 @@ export const authApi = {
 // Admin endpoints (if needed)
 export const adminApi = {
   // Get all users
-  getUsers: () => api.get('/api/admin/users'),
+  getUsers: () => api.get('/admin/users'),
   
   // Update user role
-  updateUserRole: (userId, role) => api.patch(`/api/admin/users/${userId}/role`, { role }),
+  updateUserRole: (userId, role) => api.patch(`/admin/users/${userId}/role`, { role }),
   
   // Trigger manual scrape
-  triggerScrape: () => api.post('/api/admin/scrape'),
+  triggerScrape: () => api.post('/admin/scrape'),
   
   // Get scrape logs
-  getScrapeLogs: () => api.get('/api/admin/scrape/logs'),
+  getScrapeLogs: () => api.get('/admin/scrape/logs'),
   
   // System stats
-  getSystemStats: () => api.get('/api/admin/stats'),
+  getSystemStats: () => api.get('/admin/stats'),
 };
 
 // Utility functions for error handling
@@ -204,22 +204,22 @@ export const createApiHook = (apiFunction) => {
 // Ticket leads endpoints
 export const ticketApi = {
   // Create new ticket lead
-  createTicketLead: (data) => api.post('/api/tickets', data),
+  createTicketLead: (data) => api.post('/tickets', data),
   
   // Get user's tickets
-  getMyTickets: () => api.get('/api/tickets/my-tickets', { withCredentials: true }),
+  getMyTickets: () => api.get('/tickets/my-tickets', { withCredentials: true }),
   
   // Get tickets for a specific event (admin only)
-  getEventTickets: (eventId) => api.get(`/api/tickets/event/${eventId}`, { withCredentials: true }),
+  getEventTickets: (eventId) => api.get(`/tickets/event/${eventId}`, { withCredentials: true }),
   
   // Export user's tickets
-  exportMyTickets: () => api.get('/api/tickets/export', {
+  exportMyTickets: () => api.get('/tickets/export', {
     withCredentials: true,
     responseType: 'blob'
   }),
   
   // Export tickets for an event (admin only)
-  exportEventTickets: (eventId) => api.get(`/api/tickets/export/${eventId}`, {
+  exportEventTickets: (eventId) => api.get(`/tickets/export/${eventId}`, {
     withCredentials: true,
     responseType: 'blob'
   }),
