@@ -105,7 +105,7 @@ export const authApi = {
   // Login (redirects to Google)
   login: () => {
     window.location.href = `${
-      import.meta.env.VITE_API_URL + "/api"
+      import.meta.env.VITE_API_URL
     }/auth/google`;
   },
   
