@@ -26,6 +26,17 @@ router.get('/logout', (req, res) => {
   });
 });
 
+// router.get('/me', (req, res) => {
+//    res.set('Cache-Control', 'no-store');
+
+//   if (req.user) {
+//     res.json(req.user);
+//   } else {
+//     res.status(401).json({ message: 'Not authenticated' });
+//   }
+// });
+
+
 router.get('/me', (req, res) => {
    res.set('Cache-Control', 'no-store');
 
