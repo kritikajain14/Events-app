@@ -5,6 +5,7 @@ import session from 'express-session';
 import passport from 'passport';
 import dotenv from 'dotenv';
 import cron from 'node-cron';
+import MongoStore from "connect-mongo";
 
 import authRoutes from './routes/auth.js';
 import eventRoutes from './routes/events.js';
@@ -22,18 +23,36 @@ app.set("trust proxy", 1);
 // Middleware
 app.use(cors({
   origin: process.env.CLIENT_URL,
-  credentials: true
+  credentials: true,
+  methods: ["GET","POST","PUT","PATCH","DELETE"],
+  allowedHeaders: ["Content-Type","Authorization"]
 }));
 app.use(express.json());
 app.use(session({
+//   secret: process.env.SESSION_SECRET,
+//   resave: false,
+//   saveUninitialized: false,
+//   proxy: true,
+//   cookie: {
+//     secure: true,       // required for HTTPS (Render + Vercel)
+//     httpOnly: true,
+//     sameSite: "none"    // required for cross-site cookies
+//   }
+// }));
+  name: "connect.sid",
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   proxy: true,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI,
+    collectionName: "sessions"
+  }),
   cookie: {
-    secure: true,       // required for HTTPS (Render + Vercel)
+    secure: true,
     httpOnly: true,
-    sameSite: "none"    // required for cross-site cookies
+    sameSite: "none",
+    maxAge: 1000 * 60 * 60 * 24 * 7
   }
 }));
 app.use(passport.initialize());
