@@ -102,7 +102,7 @@ export const authApi = {
   // Get current user
   // getCurrentUser: () => api.get('/auth/me'),
   getCurrentUser: () =>
-    axios.get(`${import.meta.env.VITE_API_URL}/auth/me`, {
+    axios.get("https://events-app-opo3.onrender.com/auth/me", {
       withCredentials: true,
     }),
 
@@ -115,7 +115,7 @@ export const authApi = {
   },
   
   // Logout
-  logout: () => axios.get(`${import.meta.env.VITE_API_URL}/auth/logout`, {
+  logout: () => axios.get("https://events-app-opo3.onrender.com/auth/logout", {
       withCredentials: true,
     }),
   
