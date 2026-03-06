@@ -28,7 +28,12 @@ app.use(express.json());
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: {
+    secure: true,       // required for HTTPS (Render + Vercel)
+    httpOnly: true,
+    sameSite: "none"    // required for cross-site cookies
+  }
 }));
 app.use(passport.initialize());
 app.use(passport.session());

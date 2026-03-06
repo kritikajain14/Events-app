@@ -115,7 +115,9 @@ export const authApi = {
   },
   
   // Logout
-  logout: () => api.get('/auth/logout'),
+  logout: () => axios.get(`${import.meta.env.VITE_API_URL}/auth/logout`, {
+      withCredentials: true,
+    }),
   
   // Check if user is authenticated
   checkAuth: () => api.get('/auth/check'),
