@@ -29,7 +29,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  proxy: true, 
+  proxy: true,
   cookie: {
     secure: true,       // required for HTTPS (Render + Vercel)
     httpOnly: true,
