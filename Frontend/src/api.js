@@ -100,7 +100,12 @@ export const dashboardApi = {
 // Auth endpoints
 export const authApi = {
   // Get current user
-  getCurrentUser: () => api.get('/auth/me'),
+  // getCurrentUser: () => api.get('/auth/me'),
+  getCurrentUser: () =>
+    axios.get(`${import.meta.env.VITE_API_URL}/auth/me`, {
+      withCredentials: true,
+    }),
+
   
   // Login (redirects to Google)
   login: () => {
